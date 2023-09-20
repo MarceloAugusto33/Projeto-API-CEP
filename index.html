@@ -51,12 +51,19 @@
                 erro_cep.innerHTML = ""
             }
             //UTILIZAR DA API
-            location.href="#pos-api"
             let data = fazget("https://viacep.com.br/ws/"+ cep +"/json/")
             let end = JSON.parse(data)
 
-
-
+            
+            if (end.erro == true){
+                document.getElementById('erro-cep').innerHTML = "";
+                document.getElementById('erro-cep').style.color = 'red'
+                const timerId = setTimeout(function() {erro_cep.innerHTML = "CEP INVALIDO!"}, 1200);
+                return
+            }else{
+                document.getElementById('erro-cep').innerHTML = "Cep encontrado!";
+                document.getElementById('erro-cep').style.color = 'green';
+            }
 
             //CRIANDO A DIV PRE MONTADA NO JS
             divCar = ""
@@ -74,11 +81,13 @@
 
 
             document.getElementById("pos-api").innerHTML = divCar;
+            location.href="#pos-api"
             
         }
         function limpar(){
             document.getElementById("pos-api").innerHTML = "<h2> Endereço: </h2>";
             document.getElementById("cep").value = "";
+            document.getElementById('erro-cep').innerHTML = "";
         }
     </script>
 </body>
