@@ -30,6 +30,8 @@ main{
     font-family: 'Poppins', sans-serif;
     margin-bottom: 20px;
     box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.555);
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.555);
+        border-radius: 20px;
 
 
 }
@@ -104,4 +106,21 @@ p , h2{
         background-color: black;
         margin-top: 20px;
     }
+}
+.buttom{
+    margin-top: 15px;
+    height: 35px;
+    background-color: rgb(240, 147, 7);
+    color: white;
+    border-color: rgb(240, 147, 7)ue;
+    box-shadow: 1px 1px 2px black;
+    margin-left: 20px;
+}
+.buttom:hover{
+    background-color: rgb(187, 255, 0);
+    border-color: rgb(227, 252, 4);
+    height: 38px;
+    width: 75px;
+    transition-duration: 0.4s;
+    color: black;
 }

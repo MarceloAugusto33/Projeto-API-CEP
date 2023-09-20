@@ -19,6 +19,7 @@
                     <input type="number" placeholder="CEP" id="cep" required>
                     <div id="erro-cep"></div>
                     <input type="button" value="Buscar Endereço" id="buttom" onclick="buscar()">
+                    <input type="button" value="Limpar" class="buttom" onclick="limpar()">
                 </form>
             </div>
         </div>
@@ -46,11 +47,9 @@
                 erro_cep.innerHTML = "CEP INVALIDO!"
                 return
                 cep.value[0] = null
-            } if (cep.length == 8){
+            }if (cep.length == 8){
                 erro_cep.innerHTML = ""
             }
-            //CRIAR UMA DIV QUANDO O CEP FOR BUSCADO{
-            
             //UTILIZAR DA API
             location.href="#pos-api"
             let data = fazget("https://viacep.com.br/ws/"+ cep +"/json/")
@@ -76,6 +75,10 @@
 
             document.getElementById("pos-api").innerHTML = divCar;
             
+        }
+        function limpar(){
+            document.getElementById("pos-api").innerHTML = "<h2> Endereço: </h2>";
+            document.getElementById("cep").value = "";
         }
     </script>
 </body>
