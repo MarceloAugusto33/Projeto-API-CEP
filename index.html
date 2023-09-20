@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API CEP</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Projeto API CEP</h1>
+    </header>
+    <main id="main">
+        <div id="Input-cep" class="card">
+            <div id="card-cep">
+                <img src="imagens/undraw_location_tracking_re_n3ok.svg" alt="Imagem de endereço">
+                <form>
+                    <label for="CEP">CEP: </label>
+                    <input type="number" placeholder="CEP" id="cep" required>
+                    <div id="erro-cep"></div>
+                    <input type="button" value="Buscar Endereço" id="buttom" onclick="buscar()">
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div id="pos-api" class="card">
+            <h2>Endereço: </h2>
+        </div>
+
+    </main>
+    <footer>
+        <p>Site produzido por Marcelo Augusto</p>
+    </footer>
+    <script>
+        let contador = 0
+        function fazget(url){
+            let request = new XMLHttpRequest()
+            request.open("GET", url, false)
+            request.send()
+            return request.responseText
+        }
+        function buscar(){
+            let cep = document.getElementById('cep').value
+            const erro_cep = document.getElementById('erro-cep')
+            //VERIFICAR SE O CEP ESTÀ INAVLIDO!
+            if (cep.length < 8 || cep.length > 8){
+                erro_cep.innerHTML = "CEP INVALIDO!"
+                return
+                cep.value[0] = null
+            } if (cep.length == 8){
+                erro_cep.innerHTML = ""
+            }
+            //CRIAR UMA DIV QUANDO O CEP FOR BUSCADO{
+            
+            //UTILIZAR DA API
+            let data = fazget("https://viacep.com.br/ws/"+ cep +"/json/")
+            let end = JSON.parse(data)
+
+
+
+
+            //CRIANDO A DIV PRE MONTADA NO JS
+            divCar = ""
+            divCar += '<div id="endereço" class="card">'
+            divCar += '<h2> <strong>Endereço: </strong> </h2>'
+            divCar += '<p> <strong>Cep: </strong>'+ end.cep +'</p>'
+            divCar += '<p> <strong>Logradouro: </strong>'+ end.logradouro +'</p>'
+            divCar += '<p> <strong>Complemento: </strong>'+ end.complemento +'</p>'
+            divCar += '<p> <strong>Bairro: </strong>'+ end.bairro +'</p>'
+            divCar += '<p> <strong>Localidade: </strong>'+ end.localidade +'</p>'
+            divCar += '<p> <strong>Uf: </strong>'+ end.uf +'</p>'
+            divCar += '</div>'
+            //COLOCANDO ELA NO HTML
+
+
+
+            document.getElementById("pos-api").innerHTML = divCar;
+            
+        }
+    </script>
+</body>
+</html>
