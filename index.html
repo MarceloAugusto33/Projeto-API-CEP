@@ -19,7 +19,6 @@
                     <input type="number" placeholder="CEP" id="cep" required>
                     <div id="erro-cep"></div>
                     <input type="button" value="Buscar Endereço" id="buttom" onclick="buscar()">
-                    </button>
                 </form>
             </div>
         </div>
@@ -53,6 +52,7 @@
             //CRIAR UMA DIV QUANDO O CEP FOR BUSCADO{
             
             //UTILIZAR DA API
+            location.href="#pos-api"
             let data = fazget("https://viacep.com.br/ws/"+ cep +"/json/")
             let end = JSON.parse(data)
 
