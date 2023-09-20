@@ -69,9 +69,7 @@ img{
 footer{
     width: 100%;
     color: white;
-    position:fixed;
     background-color: black;
-    bottom: 0;
 }
 p , h2{
     margin: 0;
