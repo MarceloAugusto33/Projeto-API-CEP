@@ -44,7 +44,9 @@
             const erro_cep = document.getElementById('erro-cep')
             //VERIFICAR SE O CEP ESTÀ INAVLIDO!
             if (cep.length < 8 || cep.length > 8){
+                document.getElementById('erro-cep').style.color = 'red'
                 erro_cep.innerHTML = "CEP INVALIDO!"
+
                 return
                 cep.value[0] = null
             }if (cep.length == 8){
@@ -56,8 +58,9 @@
 
             
             if (end.erro == true){
-                document.getElementById('erro-cep').innerHTML = "";
                 document.getElementById('erro-cep').style.color = 'red'
+                document.getElementById('erro-cep').innerHTML = "";
+                
                 const timerId = setTimeout(function() {erro_cep.innerHTML = "CEP INVALIDO!"}, 1200);
                 return
             }else{
