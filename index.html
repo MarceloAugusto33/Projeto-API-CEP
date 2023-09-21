@@ -6,10 +6,11 @@
     <title>API CEP</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body onload="inicio()">
     <header>
-        <h1>Projeto API CEP</h1>
+        <h1>Projeto API <span class="cor">CEP</span></h1>
     </header>
+    <h1 id="titulo">Buscar Endereço</h1>
     <main id="main">
         <div id="Input-cep" class="card">
             <div id="card-cep">
@@ -25,13 +26,17 @@
         </div>
         <div id="pos-api" class="card">
             <h2>Endereço: </h2>
+            <img src='imagens/undraw_my_location_re_r52x.svg'>
         </div>
 
     </main>
     <footer>
-        <p>Site produzido por Marcelo Augusto</p>
+        <p>Site produzido por <span class="cor">Marcelo Augusto</span></p>
     </footer>
     <script>
+        function inicio(){
+            document.getElementById("pos-api").innerHTML = "<h2> Endereço: </h2> <img src='imagens/undraw_my_location_re_r52x.svg'>";
+        }
         let contador = 0
         function fazget(url){
             let request = new XMLHttpRequest()
@@ -88,9 +93,10 @@
             
         }
         function limpar(){
-            document.getElementById("pos-api").innerHTML = "<h2> Endereço: </h2>";
+            document.getElementById("pos-api").innerHTML = "<h2> Endereço: </h2> ";
             document.getElementById("cep").value = "";
             document.getElementById('erro-cep').innerHTML = "";
+            inicio()
         }
     </script>
 </body>
