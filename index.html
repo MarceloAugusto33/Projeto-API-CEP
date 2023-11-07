@@ -3,101 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>API CEP</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <title>Projeto CEP</title>
 </head>
-<body onload="inicio()">
+<body>
     <header>
-        <h1>Projeto API <span class="cor">CEP</span></h1>
+        <nav class="nav-bar">
+            <h1>PROJETO <span>CEP</span></h1>
+        </nav>
     </header>
-    <h1 id="titulo">Buscar Endereço</h1>
-    <main id="main">
-        <div id="Input-cep" class="card">
-            <div id="card-cep">
-                <img src="imagens/undraw_location_tracking_re_n3ok.svg" alt="Imagem de endereço">
-                <form>
-                    <label for="CEP">CEP: </label>
-                    <input type="number" placeholder="CEP" id="cep" required>
-                    <div id="erro-cep"></div>
-                    <input type="button" value="Buscar Endereço" id="buttom" onclick="buscar()">
-                    <input type="button" value="Limpar" class="buttom" onclick="limpar()">
-                </form>
+    <main>
+        <h1>Buscar Endereço</h1>
+        <section>
+            <div class="container-flex">
+                <div class="card" id="input">
+                    <form autocomplete="on">
+                        <img src="assets/imagens/undraw_location_tracking_re_n3ok.svg" alt="">
+                        <div class="campo">
+                            <span class="material-symbols-outlined">location_on</span>
+                            <label for="cep">CEP:</label><br>
+                            <input type="number" required min="8" id="cep" placeholder="Insira seu cep">
+                            <div class="estado"></div>
+                            <div class="botoes">
+                                <article id="procurar" onclick="buscarAPI()">
+                                    <span class="material-symbols-outlined">search</span>
+                                    <input type="button" value="Procurar" id="request">
+                                </article>
+                                <article id="reset" onclick="resetar()">
+                                    <span class="material-symbols-outlined">restart_alt</span>
+                                    <input type="reset" id="reseted">
+                                </article>
+                            </div>
+                            <div id="resultado">
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
-        <div id="pos-api" class="card">
-            <h2>Endereço: </h2>
-            <img src='imagens/undraw_my_location_re_r52x.svg'>
-        </div>
-
+        </section>
     </main>
     <footer>
-        <p>Site produzido por <span class="cor">Marcelo Augusto</span></p>
+        <div class="flex-footer">
+            <h1>Links Uteis</h1>
+            <p><a href="https://www.linkedin.com/in/marcelo-augusto-8bb411271/">Linkedin</a></p>
+            <p><a href="https://github.com/MarceloAugusto33">github</a></p>
+        </div>
+        <div class="criador">
+            <h1>Site criado por <span>Marcelo Augusto</span></h1>
+        </div>
     </footer>
-    <script>
-        function inicio(){
-            document.getElementById("pos-api").innerHTML = "<h2> Endereço: </h2> <img src='imagens/undraw_my_location_re_r52x.svg'>";
-        }
-        let contador = 0
-        function fazget(url){
-            let request = new XMLHttpRequest()
-            request.open("GET", url, false)
-            request.send()
-            return request.responseText
-        }
-        function buscar(){
-            let cep = document.getElementById('cep').value
-            const erro_cep = document.getElementById('erro-cep')
-            //VERIFICAR SE O CEP ESTÀ INAVLIDO!
-            if (cep.length < 8 || cep.length > 8){
-                document.getElementById('erro-cep').style.color = 'red'
-                erro_cep.innerHTML = "CEP INVALIDO!"
-
-                return
-                cep.value[0] = null
-            }if (cep.length == 8){
-                erro_cep.innerHTML = ""
-            }
-            //UTILIZAR DA API
-            let data = fazget("https://viacep.com.br/ws/"+ cep +"/json/")
-            let end = JSON.parse(data)
-
-            
-            if (end.erro == true){
-                document.getElementById('erro-cep').style.color = 'red'
-                document.getElementById('erro-cep').innerHTML = "";
-                
-                const timerId = setTimeout(function() {erro_cep.innerHTML = "CEP INVALIDO!"}, 1200);
-                return
-            }else{
-                document.getElementById('erro-cep').innerHTML = "Cep encontrado!";
-                document.getElementById('erro-cep').style.color = 'green';
-            }
-
-            //CRIANDO A DIV PRE MONTADA NO JS
-            divCar = ""
-            divCar += '<div id="endereço" class="card">'
-            divCar += '<h2> <strong>Endereço: </strong> </h2>'
-            divCar += '<p> <strong>Cep: </strong>'+ end.cep +'</p>'
-            divCar += '<p> <strong>Logradouro: </strong>'+ end.logradouro +'</p>'
-            divCar += '<p> <strong>Complemento: </strong>'+ end.complemento +'</p>'
-            divCar += '<p> <strong>Bairro: </strong>'+ end.bairro +'</p>'
-            divCar += '<p> <strong>Localidade: </strong>'+ end.localidade +'</p>'
-            divCar += '<p> <strong>Uf: </strong>'+ end.uf +'</p>'
-            divCar += '</div>'
-            //COLOCANDO ELA NO HTML
-
-
-
-            document.getElementById("pos-api").innerHTML = divCar;
-            location.href="#pos-api"
-            
-        }
-        function limpar(){
-            document.getElementById("pos-api").innerHTML = "<h2> Endereço: </h2> ";
-            document.getElementById("cep").value = "";
-            document.getElementById('erro-cep').innerHTML = "";
-            inicio()
-        }
-    </script>
+    <script src="assets/js/script.js"></script>
 </body>
 </html>
