@@ -1,45 +1,53 @@
-let novocard = document.querySelector('#resultado');
-let inputCep = document.querySelector('#cep')
-let estado = document.querySelector('.estado')
+import alertError from "./alertError.js";
+import Modal from "./modal.js";
 
-function buscarAPI() {
-    let cep = inputCep.value;
-    if (cep.length != 8 || cep == "" || cep == null || cep == undefined){
-        estado.style.color = "red"
-        estado.textContent = "Insira o cep correto!"
-    } else{
-        estado.style.color = "green"
-        estado.textContent = "Buscando Endereço..."
-        setTimeout(function(){
-            fetch(`https://viacep.com.br/ws/${cep}/json/`)
-                .then(response => response.json())
-                .then(jsonData => {
-                    if(jsonData.erro == true){
-                        console.log('Erro ao encontrar o cep')
-                        estado.style.color = "red"
-                        estado.textContent = "Endereço não Encontrado!"
-                        novocard.innerHTML = ""
-                        novocard.style.display = "none"
-                    } else{
-                        estado.textContent = "Endereço Encontrado"
-                        novocard.style.display = "block"
-                        novocard.innerHTML = `<h1>Endereço Encontrado!</h1>
-                                                    <p>Bairro: ${jsonData.bairro}</p>
-                                                    <p>Cep: ${jsonData.cep}</p>
-                                                    <p>Complemento: ${jsonData.complemento}</p>
-                                                    <p>ddd: ${jsonData.ddd}</p>
-                                                    <p>Localidade: ${jsonData.localidade}</p>
-                                                    <p>logradouro: ${jsonData.logradouro}</p>
-                                                    <p>Estado: ${jsonData.uf}</p>`
-                        location.href = "#resultado"
-                    }
-                })
-            },2000)
+const inputCEP = document.querySelector('#inputCEP');
+const buttonGetCep = document.querySelector('#getCep');
+const divAlertError = document.querySelector('.alertError');
+const divModalWrapper = document.querySelector('.modal-wrapper');
+const divModal = document.querySelector('.modal')
+
+
+const alert = alertError({
+    divAlertError
+});
+
+const modal = Modal({
+    divModalWrapper,
+    divModal
+})
+
+
+buttonGetCep.addEventListener('click', getEndressApi)
+inputCEP.addEventListener('input', alert.close)
+
+
+function getEndressApi(e) {
+    e.preventDefault()
+    let CEP = inputCEP.value
+
+    if (!CEP || CEP.length != 8) {
+        console.log('falha')
+        alert.open()
+        return
     }
-}
-function resetar(){
-    novocard.innerHTML = ""
-    estado.innerHTML = ""
-    novocard.style.display = "none"
-    inputCep.value = ""
+
+    try {
+        fetch(`https://viacep.com.br/ws/${CEP}/json/`)
+            .then((reponse) => {
+                return reponse.json()
+            })
+            .then((jsonAdress) => {
+                if (jsonAdress.erro) return alert.open()
+
+                console.log(jsonAdress)
+                modal.open(jsonAdress)
+            })
+            .catch((err) => {
+                alert.open()
+            })
+    } catch (err) {
+        alert.open()
+    }
+
 }

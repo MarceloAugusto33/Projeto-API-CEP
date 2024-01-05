@@ -1,58 +1,69 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- meta -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets/imagens/lugar-colocar.png" type="image/x-png">
+    <title>Buscar CEP</title>
+
+    <!-- styles -->
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <title>Projeto CEP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@700&family=Open+Sans&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <!-- script -->
+    <script type="module" src="assets/js/script.js" defer></script>
 </head>
+
 <body>
-    <header>
-        <nav class="nav-bar">
-            <h1>PROJETO <span>CEP</span></h1>
-        </nav>
-    </header>
-    <main>
-        <h1>Buscar Endereço</h1>
-        <section>
-            <div class="container-flex">
-                <div class="card" id="input">
-                    <form autocomplete="on">
-                        <img src="assets/imagens/undraw_location_tracking_re_n3ok.svg" alt="">
-                        <div class="campo">
-                            <span class="material-symbols-outlined">location_on</span>
-                            <label for="cep">CEP:</label><br>
-                            <input type="number" required min="8" id="cep" placeholder="Insira seu cep">
-                            <div class="estado"></div>
-                            <div class="botoes">
-                                <article id="procurar" onclick="buscarAPI()">
-                                    <span class="material-symbols-outlined">search</span>
-                                    <input type="button" value="Procurar" id="request">
-                                </article>
-                                <article id="reset" onclick="resetar()">
-                                    <span class="material-symbols-outlined">restart_alt</span>
-                                    <input type="reset" id="reseted">
-                                </article>
-                            </div>
-                            <div id="resultado">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </section>
-    </main>
-    <footer>
-        <div class="flex-footer">
-            <h1>Links Uteis</h1>
-            <p><a href="https://www.linkedin.com/in/marcelo-augusto-8bb411271/">Linkedin</a></p>
-            <p><a href="https://github.com/MarceloAugusto33">github</a></p>
+    <div class="alertError">
+        Digite o CEP corretamente
+    </div>
+    <section class="modal-wrapper hide">
+        <div class="modal">
+
         </div>
-        <div class="criador">
-            <h1>Site criado por <span>Marcelo Augusto</span></h1>
-        </div>
-    </footer>
-    <script src="assets/js/script.js"></script>
+    </section>
+    <div class="page">
+        <header>
+            <nav>
+                <a href="#">Localize.me</a>
+                <a href="#">Home</a>
+            </nav>
+        </header>
+        <main>
+            <section class="text">
+                <h1>Desvende Seu <span>Endereço</span> com Precisão!</h1>
+                <p>Explore a praticidade da nossa solução de <strong>busca por CEP exclusiva para você</strong>.
+                    Simplificamos o acesso
+                    às informações do seu endereço, tornando a e<strong>xperiência rápida e eficiente</strong>. Insira o
+                    CEP desejado e
+                    desvende os detalhes do seu local com precisão. </p>
+                <form>
+                    <label for="inputCEP">CEP (somente numeros)</label>
+                    <input type="number" placeholder="66123070" id="inputCEP">
+                    <button id="getCep">
+                        Buscar CEP
+                        <span class="material-symbols-outlined">search</span>
+                    </button>
+                </form>
+            </section>
+
+            <img src="assets/imagens/undraw_location_search_re_ttoj.svg" alt="Desenho De um">
+
+        </main>
+        <footer>
+            <a href="https://marceloaugusto33.github.io/PORTIFOLIO/" target="_blank">By <span>Marcelo Augusto</span></a>
+        </footer>
+    </div>
 </body>
+
 </html>
