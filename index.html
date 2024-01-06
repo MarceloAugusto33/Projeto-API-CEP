@@ -10,14 +10,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="assets/imagens/lugar-colocar.png" type="image/x-png">
-    <title>Buscar CEP</title>
+    <title>Localize.me</title>
 
     <!-- styles -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@700&family=Open+Sans&display=swap"
         rel="stylesheet">
     <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
     <!-- script -->
     <script type="module" src="assets/js/script.js" defer></script>
@@ -29,7 +29,9 @@
     </div>
     <section class="modal-wrapper hide">
         <div class="modal">
-
+            <button id="btnClose"><span class="material-symbols-outlined">close</span></button>
+            <div class="modalText">
+            </div>
         </div>
     </section>
     <div class="page">
@@ -49,7 +51,7 @@
                     desvende os detalhes do seu local com precisão. </p>
                 <form>
                     <label for="inputCEP">CEP (somente numeros)</label>
-                    <input type="number" placeholder="66123070" id="inputCEP">
+                    <input type="number" placeholder="66123123" id="inputCEP">
                     <button id="getCep">
                         Buscar CEP
                         <span class="material-symbols-outlined">search</span>

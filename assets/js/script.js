@@ -5,7 +5,8 @@ const inputCEP = document.querySelector('#inputCEP');
 const buttonGetCep = document.querySelector('#getCep');
 const divAlertError = document.querySelector('.alertError');
 const divModalWrapper = document.querySelector('.modal-wrapper');
-const divModal = document.querySelector('.modal')
+const buttonClose = document.querySelector('#btnClose');
+const divModaltext = document.querySelector('.modalText');
 
 
 const alert = alertError({
@@ -14,40 +15,45 @@ const alert = alertError({
 
 const modal = Modal({
     divModalWrapper,
-    divModal
+    divModaltext
 })
 
 
 buttonGetCep.addEventListener('click', getEndressApi)
-inputCEP.addEventListener('input', alert.close)
+buttonClose.addEventListener('click', modal.close);
+inputCEP.addEventListener('input', alert.close);
+inputCEP.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+        getEndressApi();
+        inputCEP.blur();
+    }
+});
 
 
+//FUNÇAO PARA PEGAR O ENDEREÇO DO CEP
 function getEndressApi(e) {
     e.preventDefault()
     let CEP = inputCEP.value
 
     if (!CEP || CEP.length != 8) {
-        console.log('falha')
         alert.open()
         return
     }
 
     try {
         fetch(`https://viacep.com.br/ws/${CEP}/json/`)
-            .then((reponse) => {
+            .then(reponse => {
                 return reponse.json()
             })
-            .then((jsonAdress) => {
+            .then(jsonAdress => {
                 if (jsonAdress.erro) return alert.open()
-
-                console.log(jsonAdress)
-                modal.open(jsonAdress)
+                modal.open(jsonAdress);
+                inputCEP.value = ''
             })
-            .catch((err) => {
+            .catch(err => {
                 alert.open()
             })
     } catch (err) {
         alert.open()
     }
-
 }

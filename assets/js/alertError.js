@@ -1,3 +1,5 @@
+//FUNÇÃO DE CONTROLE PARA ATIVAR O ALERT DE ERRO
+
 export default function alertError({
     divAlertError
 }) {

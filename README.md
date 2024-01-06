@@ -1,6 +1,7 @@
 # Projeto API CEP 🌏
 <h1>
-    <img src="assets/imagens/Captura de tela 2023-11-07 170952.png"> 👉 <a href="https://marceloaugusto33.github.io/Projeto-API-CEP/"> PROJETO EM AÇAO!!</a>
+    <img src="assets/imagens/CapaDoProjeto(APICEP).png"> 
+    <a href="https://marceloaugusto33.github.io/Projeto-API-CEP/">PROJETO EM AÇAO!!</a>
 </h1>
 
 
